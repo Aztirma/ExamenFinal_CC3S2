@@ -175,6 +175,13 @@ No se pudo crear la base de datos debido a un problema con BigDecimal, pensé qu
 
 ![Alt text](image-12.png)
 
+Ahora ejecutamos el comando `rails generate controller search_tmdb`el cual nos crerará el controlador `search_tmdb` , el cual usaremos en los pasos posteriores 
+
+![Alt text](image-19.png)
+
+
+![Alt text](image-20.png)
+
 ## Paso 1: Escribiendo una nueva vista
 
 1.  Llamaremos a la acción del controlador search_tmdb, Lo primero que haremos será crear la vista  rrespondiente a esa acción 
@@ -197,15 +204,20 @@ No se pudo crear la base de datos debido a un problema con BigDecimal, pensé qu
     ```
 
 
-    Copiamos este codigo en nuestro archivo ya mencionado, así como se observa a continuación:
+    Copiamos este codigo en nuestro archivo ya mencionado, así como se observa a continuación, se realizaron unos cambios de lo anterior proporcionado
 
-    ![Alt text](image-10.png)
+    ![Alt text](image-23.png)
 
-    Este formulario envía una solicitud GET a la acción `search_tmdb` del controlador `MoviesController`.
+     Una vez completado el formulario, accedemos a la rta search_tmdb para ver si nuestras configuraciones fueron correctas o no
+
+
+    ![Alt text](image-21.png)
 
     
     **Controlador `MoviesController` con el método `search_tmdb`:**  
     Ahora, en dicho controlador, debemos tener el método `search_tmdb` que manejará esta solicitud. Se agregara lo siguiente en `app/controllers/movies_controller.rb`:
+
+    
 
     ```ruby
     # app/controllers/movies_controller.rb

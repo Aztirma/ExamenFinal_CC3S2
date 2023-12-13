@@ -7,7 +7,35 @@
 
 
 2. Digamos que nos dan el modelo de User de la siguiente manera: 
+
+    ``` 
     class User < ActiveRecord::Base
     validates :username, :presence => true
     validate :username_format
     end
+    ``` 
+
+
+    1. **¿Qué pasa si tenemos @user sin nombre de usuario y llamamos a @user.valid? ¿Qué 	guardará @user.save ?**  
+
+    Si se tiene un objeto `@user` sin un nombre de usuario y llamamos a `@user.valid?`, la validación de presencia (`validates :username, :presence => true`) fallará, ya que el nombre de usuario no está presente. Esto significa que `@user.valid?` devolverá `false`. Si intentamos guardar el objeto con `@user.save`, la operación de guardado también fallará, ya que las validaciones no se cumplen.
+
+
+    2. Implementa username_format. Para los propósitos, un nombre de usuario comienza 	con una letra y tiene como máximo 10 caracteres de largo. Recuerda, las validaciones 	personalizadas agregan un mensaje a la colección de errores.
+
+    ```ruby
+    class User < ActiveRecord::Base
+    validates :username, :presence => true
+    validate :username_format
+
+    private
+
+    def username_format
+        unless username.blank? || /\A[A-Za-z][A-Za-z0-9]{0,9}\z/.match?(username)
+        errors.add(:username, "debe comenzar con una letra y tener como máximo 10 caracteres de largo.")
+        end
+    end
+    end
+    ```
+
+ 

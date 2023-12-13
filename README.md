@@ -217,7 +217,7 @@ Ahora ejecutamos el comando `rails generate controller search_tmdb`el cual nos c
     **Controlador `MoviesController` con el método `search_tmdb`:**  
     Ahora, en dicho controlador, debemos tener el método `search_tmdb` que manejará esta solicitud. Se agregara lo siguiente en `app/controllers/movies_controller.rb`:
 
-    
+
 
     ```ruby
     # app/controllers/movies_controller.rb
@@ -236,8 +236,6 @@ Ahora ejecutamos el comando `rails generate controller search_tmdb`el cual nos c
 
     ```
  
-    ![Alt text](image-15.png)
-
     **RSpec Test para el método `search_tmdb` en `movies_controller_spec.rb`:**  
     Ahora, podemos completar nuestro archivo de especificaciones con el código de prueba. A continuación se tiene una sugerencia:
 
@@ -281,17 +279,19 @@ Ahora ejecutamos el comando `rails generate controller search_tmdb`el cual nos c
 end
     ```
 
-Como se observa a continuación en el archivo spec creado, se copio el codio anterior, ahora procederemos a probarlo:
-
-![Alt text](image-13.png)
-
 Recuerda ejecutar tus pruebas con `bundle exec rspec` para verificar su validez y avanzar en el proceso de desarrollo. También, ten en cuenta que este código es un punto d
 
 ![Alt text](image-14.png)
 
-Como se observa no detecta ninguna prueba, puesto que no se implemento el método search_tmdb
+Como se observa no detecta ninguna prueba, puesto que no se implemento el método search_tmdb, tratando de resolver el error, ahora el comando nos ejecuta lo siguiente:
 
+![Alt text](image-25.png)
 
+Es por ello que se procedio a resolver este error el comando que nos sugeria la salida de nuestra consola, es decir nos faltaba aún una migración para poder realizar nuestros tests.
+
+ ![Alt text](image-24.png)
+
+Ejecutamos nuevamente el código y nos indica que las pruebas aun no estan implementadas, ahora anteriormente escribimos codigo para las posibles pruebas, esta vez las ejecutaremos en el directorio correcto.
 
 ---
 ## Paso 2

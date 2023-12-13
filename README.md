@@ -216,27 +216,117 @@ No se pudo crear la base de datos debido a un problema con BigDecimal, pensé qu
     require 'rails_helper'
 
     describe MoviesController do
-        describe 'searching TMDb' do
-        it 'calls the model method that performs TMDb search' do
-            expect(Movie).to receive(:find_in_tmdb).with('Inception')
-            get :search_tmdb, params: { tmdb_form: 'Inception' }
+    describe 'searching TMDb' do
+        it 'calls Tmdb::Movie.search with the provided search term' do
+        allow(Tmdb::Movie).to receive(:search)
+        
+        get :search_tmdb, params: { search_term: 'Inception' }
+        
+        expect(Tmdb::Movie).to have_received(:search).with('Inception')
         end
 
-        it 'selects the Search Results template for rendering' do
-            get :search_tmdb, params: { tmdb_form: 'Inception' }
-            expect(response).to render_template('search_tmdb')
+        it 'renders the search_tmdb template' do
+        get :search_tmdb, params: { search_term: 'Inception' }
+        
+        expect(response).to render_template('search_tmdb')
         end
 
-        it 'makes the TMDb search results available to that template' do
-            fake_results = [double('movie1'), double('movie2')]
-            allow(Movie).to receive(:find_in_tmdb).and_return(fake_results)
-
-            get :search_tmdb, params: { tmdb_form: 'Inception' }
-            expect(assigns(:search_results)).to eq(fake_results)
+        it 'assigns the TMDb search results to @movies' do
+        movie_results = [{'title' => 'Inception', 'id' => 123}]
+        allow(Tmdb::Movie).to receive(:search).with('Inception').and_return(movie_results)
+        
+        get :search_tmdb, params: { search_term: 'Inception' }
+        
+        expect(assigns(:movies)).to eq(movie_results)
         end
+
+        it 'redirects to root_path if search term is blank' do
+        get :search_tmdb, params: { search_term: '' }
+        
+        expect(flash[:alert]).to eq('Please enter a search term')
+        expect(response).to redirect_to(root_path)
         end
     end
+end
     ```
 
+Como se observa a continuación en el archivo spec creado, se copio el codio anterior, ahora procederemos a probarlo:
+
+![Alt text](image-13.png)
 
 Recuerda ejecutar tus pruebas con `bundle exec rspec` para verificar su validez y avanzar en el proceso de desarrollo. También, ten en cuenta que este código es un punto d
+
+![Alt text](image-14.png)
+
+Como se observa no detecta ninguna prueba, puesto que no se implemento el método search_tmdb
+
+
+
+---
+## Paso 2
+Vamos a revisar y completar el código siguiendo las instrucciones proporcionadas:
+
+1. **Completa la acción `search_tmdb` en `MoviesController`:**
+   Asegúrate de que la acción del controlador `search_tmdb` llame al método del modelo `find_in_tmdb`. Aquí está el código completo:
+
+   ```ruby
+   # app/controllers/movies_controller.rb
+
+   class MoviesController < ApplicationController
+     def search_tmdb
+       # Llama al método del modelo para realizar la búsqueda en TMDb
+       @movies = Movie.find_in_tmdb(params[:search_terms])
+       
+       # Selecciona la plantilla de vista correcta para renderizar
+       render 'search_tmdb'
+     end
+   end
+   ```
+
+2. **Completa el método `find_in_tmdb` en `Movie` para pasar la prueba:**
+   Agrega un método de clase `find_in_tmdb` en el modelo `Movie`:
+
+   ```ruby
+   # app/models/movie.rb
+
+   class Movie < ApplicationRecord
+     require 'themoviedb'
+
+     def self.find_in_tmdb(search_terms)
+       Tmdb::Api.key('tu_clave_api_tmdb')
+       results = Tmdb::Movie.find(search_terms)
+
+       results.map do |movie|
+         Movie.new(title: movie.title, release_date: movie.release_date)
+       end
+     end
+   end
+   ```
+
+   Asegúrate de instalar la gema `themoviedb` y configurar tu clave API de TMDb en `config/initializers/tmdb.rb`.
+
+3. **Especifica la expectativa en `movies_controller_spec.rb`:**
+   Modifica la especificación en `movies_controller_spec.rb` para verificar que la acción del controlador `search_tmdb` llama al método del modelo `find_in_tmdb`:
+
+   ```ruby
+   # spec/controllers/movies_controller_spec.rb
+
+   require 'rails_helper'
+
+   describe MoviesController do
+     describe 'searching TMDb' do
+       it 'calls the model method that performs TMDb search' do
+         fake_results = [double('movie1'), double('movie2')]
+         expect(Movie).to receive(:find_in_tmdb).with('hardware').
+           and_return(fake_results)
+         get :search_tmdb, params: { search_terms: 'hardware' }
+       end
+
+       # Resto de las especificaciones...
+     end
+   end
+   ```
+
+   Asegúrate de tener configurada tu aplicación y claves de API correctamente para que las pruebas se ejecuten sin problemas.
+
+Este conjunto de cambios debería completar la primera especificación y permitir que la prueba pase con éxito. Recuerda que estos son ejemplos básicos y debes ajustarlos según la estructura y necesidades específicas de tu aplicación.

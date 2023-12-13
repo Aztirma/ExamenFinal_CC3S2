@@ -108,6 +108,10 @@ Este código asume que el modelo `User` tiene un método `admin?` que devuelve `
 
 # Parte 2
 
+Para esta actividad se uso el siguiente repositorio, el cual fue proporcionado para realizar el examen final del curso, se creo otro repositorio para una mejor manejabilidad
+
+https://github.com/Aztirma/Actividad-EF.git
+
 Usaremos TDD para crear un controlador, que recibe la solicitud del usuario, y un modelo que en realidad llama al servicio TMDb remoto para obtener información sobre la película especificada.
 
 Ejecutamos `bundle install` para configurar todas las dependecnias, además editamos el gemfile para poder usar algunas gemas extras ya que trabajaremos con TMDb Api y Guard.

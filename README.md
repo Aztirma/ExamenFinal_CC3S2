@@ -159,7 +159,9 @@ Para agregar datos iniciales a la base de datos, copiamos el código que nos pro
 
 ![Alt text](image-9.png)
 
-No se pudo crear la base de datos debido a un problema con BigDecimal
+No se pudo crear la base de datos debido a un problema con BigDecimal, pensé que era un problema con las versiones, pero decidi dejar por un momento de lado ese problema y continuar, al realizar los siguientes pasos sobre la vista, al cargar la pagina, ahora si se visualizaba la base de datos, cabe aclarar que no se hizo ninguna corrección, tan solo cargo la base de datos.
+
+![Alt text](image-12.png)
 
 ## Paso 1: Escribiendo una nueva vista
 
@@ -202,6 +204,9 @@ No se pudo crear la base de datos debido a un problema con BigDecimal
     end
     ```
 
+    ![Alt text](image-11.png)
+
+
     **RSpec Test para el método `search_tmdb` en `movies_controller_spec.rb`:**  
     Ahora, podemos completar nuestro archivo de especificaciones con el código de prueba. A continuación se tiene una sugerencia:
 
@@ -213,20 +218,25 @@ No se pudo crear la base de datos debido a un problema con BigDecimal
     describe MoviesController do
         describe 'searching TMDb' do
         it 'calls the model method that performs TMDb search' do
-            # Prueba
+            expect(Movie).to receive(:find_in_tmdb).with('Inception')
+            get :search_tmdb, params: { tmdb_form: 'Inception' }
         end
 
         it 'selects the Search Results template for rendering' do
-            # Prueba
+            get :search_tmdb, params: { tmdb_form: 'Inception' }
+            expect(response).to render_template('search_tmdb')
         end
 
         it 'makes the TMDb search results available to that template' do
-            # Prueba
+            fake_results = [double('movie1'), double('movie2')]
+            allow(Movie).to receive(:find_in_tmdb).and_return(fake_results)
+
+            get :search_tmdb, params: { tmdb_form: 'Inception' }
+            expect(assigns(:search_results)).to eq(fake_results)
         end
         end
     end
     ```
 
-   Ahora, puedes llenar el contenido de cada prueba según la lógica que desees probar.
 
 Recuerda ejecutar tus pruebas con `bundle exec rspec` para verificar su validez y avanzar en el proceso de desarrollo. También, ten en cuenta que este código es un punto d

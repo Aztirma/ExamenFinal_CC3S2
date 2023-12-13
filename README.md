@@ -173,7 +173,7 @@ No se pudo crear la base de datos debido a un problema con BigDecimal, pensé qu
 
     **Vista `search_tmdb.html.erb` en la carpeta `app/views/movies`:**
 
-    Asegúrate de que tu vista `search_tmdb.html.erb` tenga un formulario con los elementos necesarios. Aquí hay un ejemplo para ayudarte a comenzar:
+    Nos aseguramos que nuestra vista `search_tmdb.html.erb` tenga un formulario con los elementos necesarios. Aquí hay un ejemplo:
 
     ```html
     <!-- app/views/movies/search_tmdb.html.erb -->
@@ -215,9 +215,8 @@ No se pudo crear la base de datos debido a un problema con BigDecimal, pensé qu
     end
 
     ```
-
-    ![Alt text](image-11.png)
-
+ 
+    ![Alt text](image-15.png)
 
     **RSpec Test para el método `search_tmdb` en `movies_controller_spec.rb`:**  
     Ahora, podemos completar nuestro archivo de especificaciones con el código de prueba. A continuación se tiene una sugerencia:

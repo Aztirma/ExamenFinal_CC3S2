@@ -38,6 +38,10 @@
     end
     ```
 
+    Creamos nuestro archivo con el codigo anterior
+
+    ![Alt text](image-16.png)
+
 3. Completa el método before_filter:check_admin a continuación que verifica si el campo de administrador en @user es verdadero. De lo contrario, redirija a la página admin_login con un mensaje que indica acceso restringido.
 
     ```ruby
@@ -62,6 +66,10 @@
     end
     end
     ```
+
+    Asi como se observa a continuacion: 
+
+    ![Alt text](image-17.png)
 
 Este código asume que el modelo `User` tiene un método `admin?` que devuelve `true` si el usuario es un administrador y `false` de lo contrario.
 
@@ -278,7 +286,7 @@ Como se observa no detecta ninguna prueba, puesto que no se implemento el métod
 Vamos a revisar y completar el código siguiendo las instrucciones proporcionadas:
 
 1. **Completa la acción `search_tmdb` en `MoviesController`:**
-   Asegúrate de que la acción del controlador `search_tmdb` llame al método del modelo `find_in_tmdb`. Aquí está el código completo:
+   Aseuremonos de que la acción del controlador `search_tmdb` llame al método del modelo `find_in_tmdb`. Aquí está el código completo:
 
    ```ruby
    # app/controllers/movies_controller.rb
@@ -295,7 +303,7 @@ Vamos a revisar y completar el código siguiendo las instrucciones proporcionada
    ```
 
 2. **Completa el método `find_in_tmdb` en `Movie` para pasar la prueba:**
-   Agrega un método de clase `find_in_tmdb` en el modelo `Movie`:
+   Agregamos un método de clase `find_in_tmdb` en el modelo `Movie`:
 
    ```ruby
    # app/models/movie.rb
@@ -314,7 +322,7 @@ Vamos a revisar y completar el código siguiendo las instrucciones proporcionada
    end
    ```
 
-   Asegúrate de instalar la gema `themoviedb` y configurar tu clave API de TMDb en `config/initializers/tmdb.rb`.
+   Asegúremonos de instalar la gema `themoviedb` y configurar tu clave API de TMDb en `config/initializers/tmdb.rb`.
 
 3. **Especifica la expectativa en `movies_controller_spec.rb`:**
    Modifica la especificación en `movies_controller_spec.rb` para verificar que la acción del controlador `search_tmdb` llama al método del modelo `find_in_tmdb`:
@@ -338,6 +346,5 @@ Vamos a revisar y completar el código siguiendo las instrucciones proporcionada
    end
    ```
 
-   Asegúrate de tener configurada tu aplicación y claves de API correctamente para que las pruebas se ejecuten sin problemas.
-
-Este conjunto de cambios debería completar la primera especificación y permitir que la prueba pase con éxito. Recuerda que estos son ejemplos básicos y debes ajustarlos según la estructura y necesidades específicas de tu aplicación.
+   Asegúremonos de tener configurada tu aplicación y claves de API correctamente para que las pruebas se ejecuten sin problemas.
+ 

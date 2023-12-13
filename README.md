@@ -107,3 +107,42 @@ Este código asume que el modelo `User` tiene un método `admin?` que devuelve `
     Por lo tanto, es aconsejable utilizar la metaprogramación basada en bloques siempre que sea posible, ya que es más segura y fácil de entender. `eval` generalmente se utiliza en casos muy específicos en los que es necesario, pero se debe usar con precaución.
 
 # Parte 2
+
+Usaremos TDD para crear un controlador, que recibe la solicitud del usuario, y un modelo que en realidad llama al servicio TMDb remoto para obtener información sobre la película especificada.
+
+Ejecutamos `bundle install` para configurar todas las dependecnias, además editamos el gemfile para poder usar algunas gemas extras ya que trabajaremos con TMDb Api y Guard.
+
+```
+gem 'faraday'  
+group :test do
+  gem 'rails-controller-testing'
+  gem 'guard-rspec'                 
+end
+```
+
+Vuelva a ejecutar bundle install para obtener las gemas. Luego ejecuta Rails generate rspec:install para asegurarte de que los archivos que RSpec que necesitas estén en su lugar. 
+
+
+Edita el archivo spec/rails_helper.rb para incluir require 'byebug' en la parte superior, de modo que puedas acceder al depurador según sea necesario para que las pruebas funcionen.
+
+
+Ejecuta el paquete exec guard init rspec para configurar los archivos necesarios para Guard, lo que dará como resultado la creación de un nuevo Guardfile. Agrega ese archivo a tu repositorio.
+
+Configura la base de datos con el comando habitual
+
+
+Ejecuta el servidor para mostrar que todo este bien.
+
+## Paso 1: Escribiendo una nueva vista
+
+```
+require 'rails_helper'
+
+describe MoviesController do
+  describe 'searching TMDb' do
+    it 'calls the model method that performs TMDb search'
+    it 'selects the Search Results template for rendering'
+    it 'makes the TMDb search results available to that template' 
+  end
+end
+```

@@ -140,22 +140,46 @@ Editamos el archivo `spec/rails_helper.rb` para incluir require 'byebug' en la p
 
 Ejecutamos el paquete `exec guard init rspec` para configurar los archivos necesarios para Guard, lo que dará como resultado la creación de un nuevo Guardfile. Agrega ese archivo a tu repositorio.
 
+![Alt text](image-5.png)
 
-Configura la base de datos con el comando habitual
+
+Configura la base de datos con el comando habitual `rake db:migrate`
+
+![Alt text](image-6.png)
 
 
 Ejecuta el servidor para mostrar que todo este bien.
 
+![Alt text](image-8.png)
+Al cargar la pagina observamos que no se observa ninguna pelicula, esto es por que nuestra base de datos esta vacia, se comprueba de la misma manera el la consola de rails, para ello intentamos ejecutar Movie.first para verificar si hay películas en la base de datos. Como aún no hemos agregado ninguna película, esto debería devolver "nil".
+
+![Alt text](image-7.png)
+
+Para agregar datos iniciales a la base de datos, copiamos el código que nos proporciona la actividad en el archivo db/seeds.rb. Este código agrega películas a la base de datos utilizando el modelo "Movie".
+
+![Alt text](image-9.png)
+
+No se pudo crear la base de datos debido a un problema con BigDecimal
+
 ## Paso 1: Escribiendo una nueva vista
 
-```
-require 'rails_helper'
+1.  Llamaremos a la acción del controlador search_tmdb, Lo primero que haremos será crear la vista  rrespondiente a esa acción 
 
-describe MoviesController do
-  describe 'searching TMDb' do
-    it 'calls the model method that performs TMDb search'
-    it 'selects the Search Results template for rendering'
-    it 'makes the TMDb search results available to that template' 
-  end
-end
-```
+    **Vista `search_tmdb.html.erb` en la carpeta `app/views/movies`:**
+
+    Asegúrate de que tu vista `search_tmdb.html.erb` tenga un formulario con los elementos necesarios. Aquí hay un ejemplo para ayudarte a comenzar:
+
+    ```html
+    <!-- app/views/movies/search_tmdb.html.erb -->
+
+    <%= form_tag(search_tmdb_path, method: :get) do %>
+        <%= label_tag :tmdb_form, 'Search TMDb:' %>
+        <%= text_field_tag :tmdb_form, params[:tmdb_form] %>
+        <%= submit_tag 'Search' %>
+    <% end %>
+
+    <%= button_to 'Back to Search', search_tmdb_path, method: :get %>
+    <%= button_to 'Back to Home', root_path, method: :get %>
+    ```
+
+    Este formulario envía una solicitud GET a la acción `search_tmdb` del controlador `MoviesController`.

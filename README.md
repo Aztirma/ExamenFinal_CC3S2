@@ -276,7 +276,6 @@ Ahora ejecutamos el comando `rails generate controller search_tmdb`el cual nos c
         expect(response).to redirect_to(root_path)
         end
     end
-end
     ```
 
 Recuerda ejecutar tus pruebas con `bundle exec rspec` para verificar su validez y avanzar en el proceso de desarrollo. También, ten en cuenta que este código es un punto d
@@ -292,6 +291,11 @@ Es por ello que se procedio a resolver este error el comando que nos sugeria la 
  ![Alt text](image-24.png)
 
 Ejecutamos nuevamente el código y nos indica que las pruebas aun no estan implementadas, ahora anteriormente escribimos codigo para las posibles pruebas, esta vez las ejecutaremos en el directorio correcto.
+
+![Alt text](image-26.png)
+
+Como observamos, las pruebas que mencionamos anteriormente falla, veamos cual es el problema
+
 
 ---
 ## Paso 2

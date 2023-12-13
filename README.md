@@ -182,4 +182,51 @@ No se pudo crear la base de datos debido a un problema con BigDecimal
     <%= button_to 'Back to Home', root_path, method: :get %>
     ```
 
+
+    Copiamos este codigo en nuestro archivo ya mencionado, así como se observa a continuación:
+
+    ![Alt text](image-10.png)
+
     Este formulario envía una solicitud GET a la acción `search_tmdb` del controlador `MoviesController`.
+
+    
+    **Controlador `MoviesController` con el método `search_tmdb`:**  
+    Ahora, en dicho controlador, debemos tener el método `search_tmdb` que manejará esta solicitud. Se agregara lo siguiente en `app/controllers/movies_controller.rb`:
+
+    ```ruby
+    # app/controllers/movies_controller.rb
+    class MoviesController < ApplicationController
+        def search_tmdb
+        # Lógica para realizar la búsqueda en TMDb
+        end
+    end
+    ```
+
+    **RSpec Test para el método `search_tmdb` en `movies_controller_spec.rb`:**  
+    Ahora, podemos completar nuestro archivo de especificaciones con el código de prueba. A continuación se tiene una sugerencia:
+
+    ```ruby
+    # spec/controllers/movies_controller_spec.rb
+
+    require 'rails_helper'
+
+    describe MoviesController do
+        describe 'searching TMDb' do
+        it 'calls the model method that performs TMDb search' do
+            # Prueba
+        end
+
+        it 'selects the Search Results template for rendering' do
+            # Prueba
+        end
+
+        it 'makes the TMDb search results available to that template' do
+            # Prueba
+        end
+        end
+    end
+    ```
+
+   Ahora, puedes llenar el contenido de cada prueba según la lógica que desees probar.
+
+Recuerda ejecutar tus pruebas con `bundle exec rspec` para verificar su validez y avanzar en el proceso de desarrollo. También, ten en cuenta que este código es un punto d

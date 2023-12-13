@@ -38,4 +38,25 @@
     end
     ```
 
- 
+3. Completa el método before_filter:check_admin a continuación que verifica si el campo de administrador en @user es verdadero. De lo contrario, redirija a la página admin_login con un mensaje que indica acceso restringido.
+
+    ```ruby
+    class AdminController < ApplicationController
+            before_filter :check_admin
+            #Completa el codigo
+    ```
+
+4. A continuación, se te proporciona un formulario que simula el inicio de sesión. Comprueba si la combinación de nombre de usuario y contraseña funciona junto con la cuenta, si la hay. Para hacer eso, queremos que se realice una solicitud HTTP POST cuando se envíe este formulario. Escribe tu solución con jQuery y comenta dónde debe ubicarse la función de devolución de llamada (callback). Comprueba tus resultados.
+
+    ```ruby
+    <form method="POST" id="foo">
+    <input type="text" class="user" />
+    <input type="password" class="pass" />
+    <input type="button" value="Log␣in" id="onSubmit" />
+    </form>
+    $("#onSubmit").click(function() {
+    # Tu codigo
+    })
+    ```
+
+ 5. ¿Cuándo deberías utilizar la metaprogramación basada en eval en lugar de la metaprogramación basada en bloques?.

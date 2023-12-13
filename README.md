@@ -198,10 +198,18 @@ No se pudo crear la base de datos debido a un problema con BigDecimal, pensé qu
     ```ruby
     # app/controllers/movies_controller.rb
     class MoviesController < ApplicationController
-        def search_tmdb
-        # Lógica para realizar la búsqueda en TMDb
+    def search_tmdb
+        @search_term = params[:search_term]
+
+        if @search_term.blank?
+        flash[:alert] = 'Please enter a search term'
+        redirect_to root_path
+        else
+        @movies = Tmdb::Movie.search(@search_term)
         end
     end
+    end
+
     ```
 
     ![Alt text](image-11.png)

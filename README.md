@@ -46,6 +46,25 @@
             #Completa el codigo
     ```
 
+    Completamos el código de la siguiente manera:
+
+    
+    ```ruby
+    class AdminController < ApplicationController
+    before_filter :check_admin
+
+    private
+
+    def check_admin
+        unless @user.admin?
+        redirect_to admin_login_path, alert: "Acceso restringido. Debes ser un administrador para ver esta página."
+        end
+    end
+    end
+    ```
+
+Este código asume que el modelo `User` tiene un método `admin?` que devuelve `true` si el usuario es un administrador y `false` de lo contrario.
+
 4. A continuación, se te proporciona un formulario que simula el inicio de sesión. Comprueba si la combinación de nombre de usuario y contraseña funciona junto con la cuenta, si la hay. Para hacer eso, queremos que se realice una solicitud HTTP POST cuando se envíe este formulario. Escribe tu solución con jQuery y comenta dónde debe ubicarse la función de devolución de llamada (callback). Comprueba tus resultados.
 
     ```ruby
@@ -59,4 +78,32 @@
     })
     ```
 
+    Completamos el código de la siguiente manera:
+
+    ```html
+    <form method="POST" id="foo">
+    <input type="text" class="user" />
+    <input type="password" class="pass" />
+    <input type="button" value="Log in" id="onSubmit" />
+    </form>
+
+    <script>
+    $("#onSubmit").click(function() {
+        var username = $(".user").val();
+        var password = $(".pass").val();
+
+        $.post("/login", { username: username, password: password }, function(response) {
+        console.log(response);
+        });
+    });
+    </script>
+    ```
+
  5. ¿Cuándo deberías utilizar la metaprogramación basada en eval en lugar de la metaprogramación basada en bloques?.
+
+    * La metaprogramación basada en `eval` debería evitarse siempre que sea posible debido a sus riesgos de seguridad.  
+    * La metaprogramación basada en bloques, generalmente es preferible ya que es más segura y menos propensa a errores. `eval` ejecuta código arbitrario, lo que puede llevar a problemas de seguridad si el código proviene de fuentes no confiables.  
+    
+    Por lo tanto, es aconsejable utilizar la metaprogramación basada en bloques siempre que sea posible, ya que es más segura y fácil de entender. `eval` generalmente se utiliza en casos muy específicos en los que es necesario, pero se debe usar con precaución.
+
+# Parte 2

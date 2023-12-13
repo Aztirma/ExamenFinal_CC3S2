@@ -112,6 +112,8 @@ Usaremos TDD para crear un controlador, que recibe la solicitud del usuario, y u
 
 Ejecutamos `bundle install` para configurar todas las dependecnias, además editamos el gemfile para poder usar algunas gemas extras ya que trabajaremos con TMDb Api y Guard.
 
+![Alt text](image.png)
+
 ```
 gem 'faraday'  
 group :test do
@@ -120,13 +122,24 @@ group :test do
 end
 ```
 
-Vuelva a ejecutar bundle install para obtener las gemas. Luego ejecuta Rails generate rspec:install para asegurarte de que los archivos que RSpec que necesitas estén en su lugar. 
+![Alt text](image-1.png)
+
+Volvemos a ejecutar bundle install para instalar las ultimas gemas que hemos añadido a nuestro archivo gemfile
+
+![Alt text](image-2.png)
+
+Luego ejecutamos Rails generate rspec:install para asegurarnos de que los archivos que RSpec que necesitamos estén en su lugar. 
+
+![Alt text](image-3.png)
 
 
-Edita el archivo spec/rails_helper.rb para incluir require 'byebug' en la parte superior, de modo que puedas acceder al depurador según sea necesario para que las pruebas funcionen.
+Editamos el archivo `spec/rails_helper.rb` para incluir require 'byebug' en la parte superior, de modo que puedas acceder al depurador según sea necesario para que las pruebas funcionen.
+
+![Alt text](image-4.png)
 
 
-Ejecuta el paquete exec guard init rspec para configurar los archivos necesarios para Guard, lo que dará como resultado la creación de un nuevo Guardfile. Agrega ese archivo a tu repositorio.
+Ejecutamos el paquete `exec guard init rspec` para configurar los archivos necesarios para Guard, lo que dará como resultado la creación de un nuevo Guardfile. Agrega ese archivo a tu repositorio.
+
 
 Configura la base de datos con el comando habitual
 
